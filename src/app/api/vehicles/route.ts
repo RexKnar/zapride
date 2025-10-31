@@ -49,8 +49,9 @@ export async function POST(request: Request) {
     let decoded: any;
     try {
       decoded = jwt.verify(token, process.env.JWT_SECRET!);
-    } catch {
-      return NextResponse.json({ error: "Invalid token" }, { status: 401 });
+    } catch(e) {
+      return NextResponse.json(e);
+      // return NextResponse.json({ error: "Invalid token" }, { status: 401 });
     }
 
     const userId = decoded.id;
@@ -110,7 +111,8 @@ console.log("Token", token);
     try {
       decoded = jwt.verify(token, process.env.JWT_SECRET as string);
     } catch {
-      return NextResponse.json({ error: "Invalid token" }, { status: 401 });
+      return NextResponse.json(e);
+      // return NextResponse.json({ error: "Invalid token" }, { status: 401 });
     }
     const userId = decoded.id;
     const vehicles = await getVehicles(userId);
