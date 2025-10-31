@@ -100,7 +100,10 @@ export async function POST(request: Request) {
 
 export async function GET(request: Request) {
   try {
+
     const token = request.headers.get("Authorization")?.split(" ")[1];
+    console.log("JWT_SECRET", process.env.JWT_SECRET);
+console.log("Token", token);
     if (!token)
       return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
     let decoded: any;
