@@ -110,7 +110,7 @@ console.log("Token", token);
     let decoded: any;
     try {
       decoded = jwt.verify(token, process.env.JWT_SECRET as string);
-    } catch {
+    } catch(e) {
       return NextResponse.json(e);
       // return NextResponse.json({ error: "Invalid token" }, { status: 401 });
     }
