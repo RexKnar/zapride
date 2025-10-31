@@ -48,7 +48,7 @@ export async function POST(request: Request) {
 
     let decoded: any;
     try {
-      decoded = jwt.verify(token, process.env.JWT_SECRET!);
+      decoded = jwt.verify(token, process.env.JWT_SECRET as string);
     } catch(e) {
       return NextResponse.json(e);
       // return NextResponse.json({ error: "Invalid token" }, { status: 401 });
