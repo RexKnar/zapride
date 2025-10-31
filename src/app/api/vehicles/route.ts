@@ -54,46 +54,46 @@ export async function POST(request: Request) {
       // return NextResponse.json({ error: "Invalid token" }, { status: 401 });
     }
 
-    const userId = decoded.id;
+    // const userId = decoded.id;
 
-    const formData = await request.formData();
-    const vehicleNo = formData.get("vehicleNo")?.toString();
-    const licenseNo = formData.get("licenseNo")?.toString();
-    const vehicleType = formData.get("vehicleType")?.toString();
-    const vehicleModel = formData.get("vehicleModel")?.toString();
-    const idProofFile = formData.get("idProof") as File | null;
-    const profilePhotoFile = formData.get("profilePhoto") as File | null;
+    // const formData = await request.formData();
+    // const vehicleNo = formData.get("vehicleNo")?.toString();
+    // const licenseNo = formData.get("licenseNo")?.toString();
+    // const vehicleType = formData.get("vehicleType")?.toString();
+    // const vehicleModel = formData.get("vehicleModel")?.toString();
+    // const idProofFile = formData.get("idProof") as File | null;
+    // const profilePhotoFile = formData.get("profilePhoto") as File | null;
 
-    if (
-      !vehicleNo ||
-      !licenseNo ||
-      !vehicleType ||
-      !vehicleModel ||
-      !idProofFile ||
-      !profilePhotoFile
-    ) {
-      return NextResponse.json(
-        { error: "All fields are required" },
-        { status: 400 }
-      );
-    }
+    // if (
+    //   !vehicleNo ||
+    //   !licenseNo ||
+    //   !vehicleType ||
+    //   !vehicleModel ||
+    //   !idProofFile ||
+    //   !profilePhotoFile
+    // ) {
+    //   return NextResponse.json(
+    //     { error: "All fields are required" },
+    //     { status: 400 }
+    //   );
+    // }
 
-    const idProofPath = await saveFile(idProofFile, "idProof");
-    console.log("ID Proof uploaded:", idProofPath);
-    const profilePhotoPath = await saveFile(profilePhotoFile, "profilePhoto");
-    console.log("Profile Photo uploaded:", profilePhotoPath);
+    // const idProofPath = await saveFile(idProofFile, "idProof");
+    // console.log("ID Proof uploaded:", idProofPath);
+    // const profilePhotoPath = await saveFile(profilePhotoFile, "profilePhoto");
+    // console.log("Profile Photo uploaded:", profilePhotoPath);
 
-    const vehicle = await createVehicle(
-      vehicleNo.toString(),
-      licenseNo.toString(),
-      vehicleType.toString(),
-      vehicleModel.toString(),
-      userId,
-      idProofPath,
-      profilePhotoPath
-    );
+    // const vehicle = await createVehicle(
+    //   vehicleNo.toString(),
+    //   licenseNo.toString(),
+    //   vehicleType.toString(),
+    //   vehicleModel.toString(),
+    //   userId,
+    //   idProofPath,
+    //   profilePhotoPath
+    // );
 
-    return NextResponse.json({ vehicle }, { status: 201 });
+    return NextResponse.json({ vehicle:'vehicle' }, { status: 201 });
   } catch (error: any) {
     return NextResponse.json({ error: error.message }, { status: 400 });
   }
