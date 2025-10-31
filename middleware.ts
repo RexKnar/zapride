@@ -2,38 +2,38 @@ import jwt from "jsonwebtoken";
 import { NextRequest, NextResponse } from "next/server";
 
 export function middleware(req: NextRequest) {
-  const { pathname } = req.nextUrl;
+  // const { pathname } = req.nextUrl;
 
-  if (
-    pathname.startsWith("/api/rides") ||
-    pathname.startsWith("/api/vehicles")
-  ) {
-    const authHeader =
-      req.headers.get("authorization") || req.headers.get("Authorization");
-    console.log("AUTH HEADER:", authHeader);
+  // if (
+  //   pathname.startsWith("/api/rides") ||
+  //   pathname.startsWith("/api/vehicles")
+  // ) {
+  //   const authHeader =
+  //     req.headers.get("authorization") || req.headers.get("Authorization");
+  //   console.log("AUTH HEADER:", authHeader);
 
-    if (!authHeader || !authHeader.startsWith("Bearer ")) {
-      return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
-    }
+  //   if (!authHeader || !authHeader.startsWith("Bearer ")) {
+  //     return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
+  //   }
 
-    try {
-      const token = authHeader;
-      // const token = authHeader.split(" ")[1];
-      console.log("TOKEN:", token);
-      const decoded = jwt.verify(token, process.env.JWT_SECRET as string);
+  //   try {
+  //     const token = authHeader;
+  //     // const token = authHeader.split(" ")[1];
+  //     console.log("TOKEN:", token);
+  //     const decoded = jwt.verify(token, process.env.JWT_SECRET as string);
 
-      const requestHeaders = new Headers(req.headers);
-      requestHeaders.set("user", JSON.stringify(decoded));
+  //     const requestHeaders = new Headers(req.headers);
+  //     requestHeaders.set("user", JSON.stringify(decoded));
 
-      return NextResponse.next({
-        request: { headers: requestHeaders },
-      });
+  //     return NextResponse.next({
+  //       request: { headers: requestHeaders },
+  //     });
        
-    } catch (err) {
-      return NextResponse.json(err, { status: 401 });
-      // return NextResponse.json({ error: "Invalid token" }, { status: 401 });
-    }
-  }
+  //   } catch (err) {
+  //     return NextResponse.json(err, { status: 401 });
+  //     // return NextResponse.json({ error: "Invalid token" }, { status: 401 });
+  //   }
+  // }
 
   return NextResponse.next();
 }
