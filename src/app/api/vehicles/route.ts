@@ -105,12 +105,8 @@ export async function GET(request: Request) {
 
     if (!token)
       return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
-    let decoded: any;
-    try {
-      decoded = jwt.verify(token, process.env.JWT_SECRET as string);
-    } catch {
-      return NextResponse.json({ error: "Invalid token" }, { status: 401 });
-    }
+    const decoded: any = jwt.verify(token, process.env.JWT_SECRET as string);
+    
     const userId = decoded.id;
     const vehicles = await getVehicles(userId);
     return NextResponse.json({ vehicles }, { status: 200 });
