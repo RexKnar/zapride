@@ -17,7 +17,8 @@ export function middleware(req: NextRequest) {
     }
 
     try {
-      const token = authHeader.split(" ")[1];
+      const token = authHeader;
+      // const token = authHeader.split(" ")[1];
       console.log("TOKEN:", token);
       const decoded = jwt.verify(token, process.env.JWT_SECRET as string);
 
