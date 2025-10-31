@@ -27,9 +27,10 @@ export function middleware(req: NextRequest) {
       return NextResponse.next({
         request: { headers: requestHeaders },
       });
-      // eslint-disable-next-line @typescript-eslint/no-unused-vars
+       
     } catch (err) {
-      return NextResponse.json({ error: "Invalid token" }, { status: 401 });
+      return NextResponse.json(err, { status: 401 });
+      // return NextResponse.json({ error: "Invalid token" }, { status: 401 });
     }
   }
 
