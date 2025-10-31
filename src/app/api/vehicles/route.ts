@@ -43,12 +43,12 @@ export async function POST(request: Request) {
       request.headers.get("authorization") ||
       request.headers.get("Authorization");
     const token = authHeader?.split(" ")[1];
-    if (!token)
-      return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
+    // if (!token)
+    //   return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
 
     let decoded: any;
     try {
-      decoded = jwt.verify(token, process.env.JWT_SECRET as string);
+      decoded = jwt.verify(token as string, process.env.JWT_SECRET as string);
     } catch(e) {
       return NextResponse.json(e);
       // return NextResponse.json({ error: "Invalid token" }, { status: 401 });
