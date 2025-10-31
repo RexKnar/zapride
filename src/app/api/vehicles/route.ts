@@ -42,7 +42,7 @@ export async function POST(request: Request) {
     const authHeader =
       request.headers.get("authorization") ||
       request.headers.get("Authorization");
-    const token = authHeader?.split(" ")[1];
+    const token = authHeader;
     if (!token)
       return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
 
@@ -101,9 +101,7 @@ export async function POST(request: Request) {
 export async function GET(request: Request) {
   try {
 
-    const token = request.headers.get("Authorization")?.split(" ")[1];
-    console.log("JWT_SECRET", process.env.JWT_SECRET);
-console.log("Token", token);
+    const token = request.headers.get("authorization") || request.headers.get("Authorization");
     if (!token)
       return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
     let decoded: any;
